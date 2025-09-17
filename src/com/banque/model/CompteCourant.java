@@ -6,14 +6,18 @@ public class CompteCourant extends Compte {
 
     @Override
     public void retirer(double montant){
-
+        if(getSolde() - montant >= -decouvert){
+            setSolde(getSolde()-montant);
+        }else {
+            System.out.println("Fonds insuffisants pour effectuer cette transaction");
+        }
     }
 
     @Override
     public  void afficherDetails(){
+        System.out.println("Code de compte : " + getCode());
         System.out.println("Le solde du compte courant est : " + getSolde());
-        System.out.println("Solde negatif minimum autorisé : " + decouvert);
-
+        System.out.println("Solde negatif minimum autorisé : - " + decouvert);
     }
 
     @Override
@@ -24,7 +28,8 @@ public class CompteCourant extends Compte {
     public double getDecouvert(){
         return decouvert;
     }
-    public void setDecouvert(double Newdecouvert){
-        this.decouvert = Newdecouvert;
+
+    public void setDecouvert(double newDecouvert){
+        this.decouvert = newDecouvert;
     }
 }
