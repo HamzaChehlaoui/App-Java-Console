@@ -5,14 +5,17 @@ public class CompteEpargne extends Compte{
     private double tauxInteret ;
 
     @Override
-    public void retirer(double montant){
-        if(getSolde()>= montant){
-            setSolde(getSolde()-montant);
-            System.out.println("Operation de retrait est succes");
-        }else{
-            System.out.println("Fonds insuffisants pour effectuer cette transaction");
+    public void retirer(double montant, String destination) {
+        if(getSolde() >= montant) {
+            setSolde(getSolde() - montant);
+            Retrait r = new Retrait(montant, destination);
+            getListOperations().add(r);
+            System.out.println("Retrait effectué : " + montant);
+        } else {
+            System.out.println("Fonds insuffisants !");
         }
     }
+
 
     @Override
     public  void afficherDetails(){
