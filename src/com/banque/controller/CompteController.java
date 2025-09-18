@@ -16,7 +16,7 @@ public class CompteController {
             System.out.println("1. Créer un compte");
             System.out.println("2. Verser");
             System.out.println("3. Retirer");
-            System.out.println("4. Consulter solde");
+            System.out.println("4. Consulter les détails du compte");
             System.out.println("5. Consulter liste des opérations");
             System.out.println("6. Virement");
             System.out.println("7. Quitter");
@@ -28,7 +28,7 @@ public class CompteController {
                     case 1: creerCompte(); break;
                     case 2: verser(); break;
                     case 3: retirer(); break;
-                    case 4: consulterSolde(); break;
+                    case 4: consulterCompteDetails(); break;
                     case 5: consulterOperations(); break;
                     case 6: virement(); break;
                     case 7: System.out.println("Au revoir !"); break;
@@ -38,7 +38,7 @@ public class CompteController {
                 System.out.println("Entrée invalide !");
                 choix = 0;
             }
-        } while (choix != 6);
+        } while (choix != 7);
     }
 
     private boolean isValidCode(String code) {
@@ -54,20 +54,31 @@ public class CompteController {
         if (c == null) System.out.println("Compte introuvable !");
         return c;
     }
+    private String genererCodeCompte() {
+        Random rand = new Random();
+        String code;
+        do {
+            int num = 10000 + rand.nextInt(90000);
+            code = "CPT-" + num;
+        } while (comptes.containsKey(code));
+        return code;
+    }
+
 
     private void creerCompte() {
         try {
             System.out.print("Type de compte (1 = Courant, 2 = Epargne) : ");
             int type = Integer.parseInt(sc.nextLine().trim());
 
-            System.out.print("Code du compte (CPT-XXXXX) : ");
-            String code = sc.nextLine().trim();
-            if (!isValidCode(code)) { System.out.println("Code invalide !"); return; }
-            if (comptes.containsKey(code)) { System.out.println("Ce compte existe déjà !"); return; }
+            String code = genererCodeCompte();
+            System.out.println("Code du compte généré : " + code);
 
             System.out.print("Solde initial : ");
             double solde = Double.parseDouble(sc.nextLine().trim());
-            if (solde < 0) { System.out.println("Solde invalide !"); return; }
+            if (solde < 0) {
+                System.out.println("Solde invalide !");
+                return;
+            }
 
             if (type == 1) {
                 System.out.print("Découvert autorisé : ");
@@ -91,6 +102,7 @@ public class CompteController {
             System.out.println("Entrée invalide !");
         }
     }
+
 
     private void verser() {
         System.out.print("Code du compte : ");
@@ -165,12 +177,14 @@ public class CompteController {
         }
     }
 
-    private void consulterSolde() {
+    private void consulterCompteDetails() {
         System.out.print("Code du compte : ");
         String code = sc.nextLine().trim();
         Compte c = getCompteOrFail(code);
         if (c == null) return;
-        System.out.println("Solde : " + c.getSolde());
+
+
+        c.afficherDetails();
     }
 
     private void consulterOperations() {
