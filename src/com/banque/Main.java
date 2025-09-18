@@ -1,10 +1,10 @@
 package com.banque;
 
-public class Main {
+import com.banque.controller.CompteController;
 
-    public static void main(String args[]){
-        for(int i = 0 ;i<9 ; i++) {
-            System.out.println("hello world");
-        }
+public class Main {
+    public static void main(String[] args) {
+        CompteController controller = new CompteController();
+        controller.startMenu();
     }
 }
