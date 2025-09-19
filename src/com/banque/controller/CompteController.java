@@ -20,7 +20,7 @@ public class CompteController {
                     }
                 }
             }
-        }, 0, 4000);
+        }, 0, 30000);
         int choix;
         do {
             System.out.println("\n=== Menu Banque ===");
