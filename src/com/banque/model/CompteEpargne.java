@@ -2,8 +2,8 @@ package com.banque.model;
 
 public class CompteEpargne extends Compte{
 
-    private double tauxInteret ;
 
+    private final double TAUX_INTERET = 0.05;
     @Override
     public void retirer(double montant, String destination) {
         if(getSolde() >= montant) {
@@ -21,20 +21,20 @@ public class CompteEpargne extends Compte{
     public  void afficherDetails(){
         System.out.println("Code de compte : " + getCode());
         System.out.println("Le solde du compte epargne est : " + getSolde());
-        System.out.println("Taux d’intérêt est : " + tauxInteret);
+        System.out.println("Taux d’intérêt est : " + TAUX_INTERET);
+    }
+    @Override
+    public double calculerInteret() {
+        return getSolde() * TAUX_INTERET;
     }
 
-    @Override
-    public double calculerInteret(){
-        double interet = getSolde() * tauxInteret;
-        return interet;
+    public void appliquerInteret() {
+        double interet = calculerInteret();
+        setSolde(getSolde() + interet);
     }
 
     public double getTauxInteret(){
-        return tauxInteret;
+        return TAUX_INTERET;
     }
 
-    public void setTauxInteret(double newTauxInteret){
-        this.tauxInteret = newTauxInteret;
-    }
 }
