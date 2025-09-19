@@ -6,7 +6,7 @@ public class CompteCourant extends Compte {
 
     @Override
     public void retirer(double montant, String destination) {
-        if(getSolde() - montant >= -decouvert) {
+        if(getSolde() - montant >= -decouvert && getSolde()!=0) {
             setSolde(getSolde() - montant);
             Retrait r = new Retrait(montant, destination);
             getListOperations().add(r);
