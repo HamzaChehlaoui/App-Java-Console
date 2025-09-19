@@ -10,6 +10,17 @@ public class CompteController {
     private Map<String, Compte> comptes = new HashMap<>();
 
     public void startMenu() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                for (Compte c : comptes.values()) {
+                    if (c instanceof CompteEpargne) {
+                        ((CompteEpargne) c).appliquerInteret();
+                    }
+                }
+            }
+        }, 0, 4000);
         int choix;
         do {
             System.out.println("\n=== Menu Banque ===");
@@ -88,10 +99,9 @@ public class CompteController {
                 comptes.put(code, cc);
                 System.out.println("Compte courant créé !");
             } else if (type == 2) {
-                System.out.print("Taux d'intérêt (ex: 0.05) : ");
-                double taux = Double.parseDouble(sc.nextLine().trim());
+
                 CompteEpargne ce = new CompteEpargne();
-                ce.setCode(code); ce.setSolde(solde); ce.setTauxInteret(taux);
+                ce.setCode(code); ce.setSolde(solde);
                 comptes.put(code, ce);
                 System.out.println("Compte épargne créé !");
             } else {
