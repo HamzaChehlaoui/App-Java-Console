@@ -1,27 +1,26 @@
-# 🚀 Application de gestion de comptes bancaires (Java 8)
+#  Application de gestion de comptes bancaires (Java 8)
 
-##  Description
-Application console permettant de gérer des **comptes bancaires** (courant & épargne) et leurs opérations :
-- Création de compte
-- Versement
-- Retrait
-- Virement
-- Consultation du solde & historique des opérations
+## 📌 Description
+Application console simple pour gérer des **comptes bancaires** :
+- Création de compte (courant / épargne)
+- Versement, Retrait, Virement
+- Consultation du solde et des opérations
 
 ---
 
-
-## 🔑 Règles principales
-- Code compte au format : **CPT-XXXXX** (ex: CPT-12345)
-- Compte courant : découvert autorisé
-- Compte épargne : intérêts calculés avec `tauxInteret`
-- Opérations enregistrées avec `UUID` + date (`Java Time API`)
-- Montants > 0 obligatoires
+## 🏗️ Structure du projet
+- `model` : classes métiers (Compte, CompteCourant, CompteEpargne, Operation, Versement, Retrait)
+- `controller` : gestion de la logique et des opérations sur les comptes
+- `main` : point d’entrée de l’application (menu console)
 
 ---
 
+## 🔧 Prérequis
+- **Java 8** ou version supérieure installée
+- Un IDE (IntelliJ / Eclipse) ou un terminal pour exécuter les commandes
+
+---
 ## ▶️ Utilisation
-Compiler et exécuter :
-```bash
-javac -d out src/**/*.java
-java -cp out com.maBanque.Main
+### Depuis IDE (IntelliJ / Eclipse)
+- Exécuter `Main.java` dans le package `main`.
+- Suivre le menu interactif dans la console.  
